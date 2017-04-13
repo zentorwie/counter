@@ -9,13 +9,13 @@ const server = http.createServer((req, res) => {
       counter += 1
       res.writeHead(200, {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:3000'
+        'Access-Control-Allow-Origin': '*'
       })
       res.end(JSON.stringify({ counter }))
     } else if (req.method === 'GET') {
       res.writeHead(200, {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:3000'
+        'Access-Control-Allow-Origin': '*'
       })
       res.end(JSON.stringify({ counter }))
     } else {

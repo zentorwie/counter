@@ -8,8 +8,6 @@ export default function promiseMiddleware () {
 
     const [REQUEST, SUCCESS, FAILURE] = types
 
-    console.log('received action: ', action)
-
     next({ ...rest, type: REQUEST })
 
     return promise().then(

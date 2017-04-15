@@ -13,10 +13,13 @@ class Home extends React.Component {
   constructor (props) {
     super(props)
     this.onIncButtonClick = this.onIncButtonClick.bind(this)
+    this.state = {
+      active: false
+    }
   }
 
   componentDidMount () {
-    setInterval(() => this.props.dispatch(getCounter()), 1000)
+    setInterval(() => this.props.dispatch(getCounter()), 5000)
   }
 
   onIncButtonClick () {

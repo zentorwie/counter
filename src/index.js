@@ -2,12 +2,12 @@ import React from 'react'
 import { render } from 'react-dom'
 import createStore from './create-store'
 import Application from './applications'
-import { server } from './config'
+import { serverAddress } from './config'
 // import { getCounter } from './action-creators'
 let store
 let initCounter = 0
 
-window.fetch(`//${server}/counter`)
+window.fetch(`${serverAddress}/counter`)
   .then(res => res.json())
   .then(res => {
     initCounter = res.counter

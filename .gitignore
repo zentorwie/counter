@@ -65,4 +65,8 @@ config.js
 
 build/
 
-db.txt
+./db.txt
+
+./config.js
+
+.vscode/

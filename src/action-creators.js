@@ -1,4 +1,4 @@
-import { server } from './config'
+import { serverAddress } from './config'
 
 export const GET_COUNTER_REQUEST = 'GET_COUNTER_REQUEST'
 export const GET_COUNTER_SUCCESS = 'GET_COUNTER_SUCCESS'
@@ -14,7 +14,7 @@ export function getCounter () {
     types: [GET_COUNTER_REQUEST, GET_COUNTER_SUCCESS, GET_COUNTER_FAILURE],
     promise: () => {
       return new Promise((resolve, reject) => {
-        fetch(`//${server}/counter`)
+        fetch(`${serverAddress}/counter`)
           .then((res) => res.json())
           .then((json) => resolve(json))
           .catch((err) => reject(err))
@@ -28,7 +28,7 @@ export function incCounter () {
     types: [INC_COUNTER_REQUEST, INC_COUNTER_SUCCESS, INC_COUNTER_FAILURE],
     promise: () => {
       return new Promise((resolve, reject) => {
-        fetch(`//${server}/counter`, {
+        fetch(`${serverAddress}/counter`, {
           method: 'POST'
         })
           .then((res) => res.json())

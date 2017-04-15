@@ -1,15 +1,15 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { INC_COUNTER_REQUEST, INC_COUNTER_SUCCESS, INC_COUNTER_FAILURE, GET_COUNTER_REQUEST, GET_COUNTER_SUCCESS, GET_COUNTER_FAILURE } from './action-creators'
-import { server } from './config'
+import { serverAddress } from './config'
 
 const fetch = window.fetch
 
 function httpGetCounter () {
-  return fetch(`//${server}/counter`).then((res) => res.json())
+  return fetch(`${serverAddress}/counter`).then((res) => res.json())
 }
 
 function httpPostCounter () {
-  return fetch(`//${server}/counter`, {
+  return fetch(`${serverAddress}/counter`, {
     method: 'POST'
   }).then((res) => res.json())
 }

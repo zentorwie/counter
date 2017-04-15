@@ -3,7 +3,6 @@ import { render } from 'react-dom'
 import createStore from './create-store'
 import Application from './applications'
 // import { getCounter } from './action-creators'
-
 let store
 let initCounter = 0
 
@@ -22,4 +21,3 @@ window.fetch('http://***REMOVED***/counter')
       document.getElementById('root')
     )
   })
-

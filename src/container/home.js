@@ -1,6 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { incCounter, getCounter } from '../action-creators'
+// import { incCounter, getCounter } from '../action-creators'
+import {
+  GET_COUNTER_REQUEST,
+  INC_COUNTER_REQUEST
+} from '../action-creators'
 import Counter from '../components/counter'
 
 let mapStateToProps = (state, props) => {
@@ -19,11 +23,13 @@ class Home extends React.Component {
   }
 
   componentDidMount () {
-    setInterval(() => this.props.dispatch(getCounter()), 5000)
+    // setInterval(() => this.props.dispatch(getCounter()), 5000)
+    setInterval(() => this.props.dispatch({ type: GET_COUNTER_REQUEST }), 5000)
   }
 
   onIncButtonClick () {
-    this.props.dispatch(incCounter())
+    // this.props.dispatch(incCounter())
+    this.props.dispatch({ type: INC_COUNTER_REQUEST })
   }
 
   render () {

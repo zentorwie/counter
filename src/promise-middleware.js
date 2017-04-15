@@ -1,6 +1,6 @@
 export default function promiseMiddleware () {
   return next => action => {
-    const { promise, types } = action
+    const { promise, types, ...rest } = action
 
     if (!promise) {
       return next(action)
@@ -8,14 +8,15 @@ export default function promiseMiddleware () {
 
     const [REQUEST, SUCCESS, FAILURE] = types
 
-    next(Object.assign({}, action, { type: REQUEST }))
+    next({ ...rest, type: REQUEST })
 
-    return promise()
-      .then((result) => {
-        next(Object.assign({}, action, { type: SUCCESS }))
-      })
-      .catch((error) => {
-        next(Object.assign({}, action, { type: FAILURE }))
-      })
+    return promise().then(
+      (result) => {
+        next({ ...rest, result, type: SUCCESS })
+      },
+      (error) => {
+        next({ ...rest, error, type: FAILURE })
+      }
+    )
   }
 }

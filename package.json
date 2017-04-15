@@ -16,12 +16,15 @@
     "babel-preset-react": "^6.24.1",
     "react-scripts": "0.9.5",
     "standard": "^10.0.1",
-    "webpack": "^2.3.3"
+    "webpack": "^2.3.3",
+    "@kadira/storybook": "^2.21.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   }
 }

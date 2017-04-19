@@ -1,5 +1,7 @@
 const http = require('http')
 const fs = require('fs')
+const Server = require('socket.io')
+const path = require('path')
 
 let counter = 0
 
@@ -28,9 +30,31 @@ const server = http.createServer((req, res) => {
   }
 })
 
+server.listen(4321)
+
+const io = Server(server)
+
+let onlineUsers = 0
+
+io.on('connection', (socket) => {
+  onlineUsers += 1
+  console.log('User connected, current online:', onlineUsers)
+  socket.on('disconnect', () => {
+    onlineUsers -= 1
+    console.log('User disconnected, current online:', onlineUsers)
+  })
+  socket.on('increase', () => {
+    counter += 1
+    io.emit('update', counter)
+  })
+  socket.on('get', () => {
+    io.emit('update', counter)
+  })
+})
+
 try {
   console.log('reading local DB file...')
-  let file = fs.readFileSync('./db.txt')
+  let file = fs.readFileSync(path.join(__dirname, './db.txt'))
   let db = JSON.parse(file.toString())
   console.log(db)
   counter = db.counter
@@ -40,7 +64,7 @@ try {
 }
 
 setInterval(() => {
-  fs.writeFile('./db.txt', JSON.stringify({ counter }), (err) => {
+  fs.writeFile(path.join(__dirname, './db.txt'), JSON.stringify({ counter }), (err) => {
     if (err) {
       console.error(err)
       console.log('saving failed')
@@ -49,5 +73,3 @@ setInterval(() => {
     }
   })
 }, 5000)
-
-server.listen(4321)
